@@ -3,29 +3,29 @@
 namespace Orm\Annotate;
 
 use Bitrix\Main\Cli\Command\Orm\AnnotateCommand;
+use Orm\Annotate\Helpers\Output;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class Executor
 {
-    public static function run(string $modules, ?string $output = null, bool $clean = false): bool
+    public static function run(string $modules, ?string $output = null, bool $clean = false): string
     {
-        $output = is_null($output)
-            ? 'orm.annotate.php'
-            : $output;
+        $output = (new Output($output))->getValue();
 
-        $cliCommand = new AnnotateCommand();
-        $cliInput = new StringInput(sprintf(
+        $strInput = sprintf(
             '--modules=%s %s %s',
             escapeshellarg($modules),
             $clean ? '--clean' : '',
             escapeshellarg($output),
-        ));
+        );
+
+        $cliCommand = new AnnotateCommand();
+        $cliInput = new StringInput($strInput);
         $cliOutput = new BufferedOutput();
 
         $cliCommand->run($cliInput, $cliOutput);
-        echo $cliOutput->fetch();
 
-        return true;
+        return $cliOutput->fetch();
     }
 }

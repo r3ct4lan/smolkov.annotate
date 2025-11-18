@@ -41,13 +41,22 @@ $arSettings = [
  */
 $request = Bitrix\Main\Context::getCurrent()->getRequest();
 if ($request->isPost()) {
+
     if (!check_bitrix_sessid()) {
         throw new AnnotationException(Loc::getMessage('ERR_CHECK_SESSID'));
     }
 
     $modules = trim((string)$request->getPost('modules'));
+
     if ($modules <> "") {
-        Executor::run($modules);
+
+        $output = trim((string)$request->getPost('output'));
+        $clean = $request->getPost('clean') === 'Y';
+
+        $strResult = Executor::run($modules, $output, $clean);
+
+        CAdminMessage::ShowNote($strResult);
+
     }
 }
 
