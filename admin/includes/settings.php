@@ -60,7 +60,8 @@ if ($request->isPost()) {
         $output = trim((string)$request->getPost('output'));
         $clean = $request->getPost('clean') === 'Y';
 
-        $strResult = Executor::run($modules, $output, $clean);
+        $annotator = new Executor($modules, $output, $clean);
+        $strResult = $annotator->run();
 
         CAdminMessage::ShowNote($strResult);
 

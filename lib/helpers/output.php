@@ -2,12 +2,15 @@
 
 namespace Orm\Annotate\Helpers;
 
+use Orm\Annotate\Helpers\Module as ModuleHelper;
 use Orm\Annotate\Module;
 
 class Output
 {
     private string $value;
-    const DEFAULT_VALUE = 'annotation.php';
+    private string $moduleName;
+
+    const DEFAULT_VALUE = 'annotate.php';
 
     const DIR_SEPARATOR = '/';
     const FILE_EXTENSION = '.php';
@@ -15,11 +18,11 @@ class Output
     public function __construct(?string $value = null)
     {
         $this->value = trim((string)$value);
-        $this->normalize();
     }
 
     public function getValue(): string
     {
+        $this->normalize();
         return $this->value;
     }
 
@@ -36,7 +39,11 @@ class Output
     private function normalizeEmpty(): void
     {
         if ($this->value === '') {
-            $this->value = $this::DEFAULT_VALUE;
+            if ($this->moduleName) {
+                $this->value = $this->getValueByModuleName();
+            } else {
+                $this->value = $this::DEFAULT_VALUE;
+            }
         }
     }
 
@@ -87,5 +94,22 @@ class Output
         if (!str_ends_with($this->value, static::FILE_EXTENSION)) {
             $this->value .= static::FILE_EXTENSION;
         }
+    }
+
+    public function setModuleName(string $moduleName): static
+    {
+        $this->moduleName = $moduleName;
+
+        return $this;
+    }
+
+    private function getValueByModuleName(): string
+    {
+        if (!$this->moduleName) {
+            return $this->value;
+        }
+
+        $moduleHelper = new ModuleHelper($this->moduleName);
+        return $moduleHelper->getDirectory() . self::DIR_SEPARATOR . self::DEFAULT_VALUE;
     }
 }
