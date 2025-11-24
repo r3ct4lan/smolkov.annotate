@@ -1,12 +1,18 @@
 <?php
 
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ModuleManager;
 use Orm\Annotate\Exceptions\AnnotationException;
 use Orm\Annotate\Executor;
 
 /**
  * Define content of the settings page
  */
+
+$modules = array_column(ModuleManager::getInstalledModules(), 'ID');
+$modules = array_combine($modules, $modules);
+
+
 $arSettings = [
     [
         "DIV" => "main",
@@ -17,7 +23,8 @@ $arSettings = [
             [
                 "TITLE" => "modules",
                 "NAME" => "modules",
-                "TYPE" => "text",
+                "TYPE" => "select",
+                "OPTIONS" => $modules,
             ],
             [
                 "TITLE" => "output",

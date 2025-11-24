@@ -34,6 +34,17 @@ $tabControl->Begin(); ?>
                             />
                             <?php break;
 
+                        case 'select': ?>
+                            <select id="<?= $arField['NAME'] ?>"
+                                    name="<?= $arField['NAME'] ?>">
+                                <?php foreach ($arField['OPTIONS'] as $value => $title) { ?>
+                                    <option value="<?= $value ?>">
+                                        <?= $title ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                            <?php break;
+
                         case 'text':
                         default: ?>
                             <input type="text"
