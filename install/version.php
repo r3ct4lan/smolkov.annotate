@@ -7,8 +7,8 @@ return [
     'MODULE_ID' => 'orm.annotate',
     'MODULE_NAME' => Loc::getMessage('MODULE_NAME'),
     'MODULE_DESCRIPTION' => Loc::getMessage('MODULE_DESCRIPTION'),
-    'MODULE_VERSION' => '0.0.5',
-    'MODULE_VERSION_DATE' => '2025-11-18',
+    'MODULE_VERSION' => '0.0.6',
+    'MODULE_VERSION_DATE' => '2025-12-01',
     'PARTNER_NAME' => Loc::getMessage('PARTNER_NAME'),
     'PARTNER_URI' => 'https://github.com/r3ct4lan/orm.annotate',
 ];

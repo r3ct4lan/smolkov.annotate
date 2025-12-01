@@ -29,12 +29,22 @@ $arSettings = [
             [
                 "TITLE" => "output",
                 "NAME" => "output",
-                "TYPE" => "text",
+                "TYPE" => "file_dialog",
+                "FILE_DIALOG_OPTIONS" => [
+                    /** @see CAdminFileDialog::ShowScript */
+                    "arPath" => ["PATH" => '/'],
+                    "select" => 'DF',
+                    "operation" => 'S',
+                    "showUploadTab" => false,
+                    "saveConfig" => true,
+                    "showAddToMenuTab" => false,
+                ],
             ],
             [
                 "TITLE" => "clean",
                 "NAME" => "clean",
                 "TYPE" => "checkbox",
+                "DEFAULT" => true,
             ],
         ],
         "BUTTONS" => [

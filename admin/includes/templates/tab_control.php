@@ -17,7 +17,7 @@ $tabControl->Begin(); ?>
     <?= bitrix_sessid_post(); ?>
     <?php foreach ($arSettings as $arTab) {
         $tabControl->BeginNextTab();
-        foreach ($arTab['FIELDS'] as $arField) { ?>
+        foreach ($arTab['FIELDS'] as $fKey => $arField) { ?>
             <tr>
                 <td>
                     <label for="<?= $arField['NAME'] ?>">
@@ -26,31 +26,59 @@ $tabControl->Begin(); ?>
                 </td>
                 <td>
                     <?php switch ($arField['TYPE']) {
-                        case 'checkbox': ?>
+                        case 'checkbox':
+                            $isChecked = $arField['DEFAULT'] == 'Y' || $arField['DEFAULT'] === true;
+                            ?>
                             <input type="checkbox"
                                    value="Y"
                                    id="<?= $arField['NAME'] ?>"
                                    name="<?= $arField['NAME'] ?>"
+                                <?= $isChecked ? 'checked' : '' ?>
                             />
                             <?php break;
 
                         case 'select': ?>
                             <select id="<?= $arField['NAME'] ?>"
                                     name="<?= $arField['NAME'] ?>">
-                                <?php foreach ($arField['OPTIONS'] as $value => $title) { ?>
-                                    <option value="<?= $value ?>">
+                                <?php foreach ($arField['OPTIONS'] as $value => $title) {
+                                    $isSelected = $value == $arField['DEFAULT']; ?>
+                                    <option value="<?= $value ?>"
+                                        <?= $isSelected ? 'selected' : '' ?>
+                                    >
                                         <?= $title ?>
                                     </option>
                                 <?php } ?>
                             </select>
                             <?php break;
 
-                        case 'text':
+                        case 'file_dialog':
+                            $onClickFunction = "openFileDialog_$fKey";
+                            $fdConfig = array_merge($arField['FILE_DIALOG_OPTIONS'], [
+                                "event" => $onClickFunction,
+                                "arResultDest" => ["ELEMENT_ID" => $arField['NAME']],
+                            ]);
+                            CAdminFileDialog::ShowScript($fdConfig);
+                            ?>
+                            <input type="text"
+                                   size="50"
+                                   id="<?= $arField['NAME'] ?>"
+                                   name="<?= $arField['NAME'] ?>"
+                                   value="<?= $arField['DEFAULT'] ?? '' ?>"
+                            >
+                            <input onClick="<?= $onClickFunction ?>()"
+                                   type="button"
+                                   name="browse"
+                                   value="..."
+                            >
+                            <?php break;
+
+                        case 'string':
                         default: ?>
                             <input type="text"
                                    size="30"
                                    id="<?= $arField['NAME'] ?>"
                                    name="<?= $arField['NAME'] ?>"
+                                   value="<?= $arField['DEFAULT'] ?? '' ?>"
                             />
                             <?php break;
                     } ?>

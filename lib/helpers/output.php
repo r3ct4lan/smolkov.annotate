@@ -59,13 +59,11 @@ class Output
 
     private function normalizeRoot(): void
     {
-        if (!str_starts_with($this->value, static::DIR_SEPARATOR)) {
-            $documentRoot = $this->replaceSeparator(Module::getDocRoot());
-            $documentRoot = rtrim($documentRoot, static::DIR_SEPARATOR);
+        $documentRoot = $this->replaceSeparator(Module::getDocRoot());
+        $documentRoot = rtrim($documentRoot, static::DIR_SEPARATOR);
 
-            if (!str_starts_with($this->value, $documentRoot)) {
-                $this->value = $documentRoot . static::DIR_SEPARATOR . ltrim($this->value, static::DIR_SEPARATOR);
-            }
+        if (!str_starts_with($this->value, $documentRoot)) {
+            $this->value = $documentRoot . static::DIR_SEPARATOR . ltrim($this->value, static::DIR_SEPARATOR);
         }
     }
 
