@@ -40,7 +40,7 @@ class Module
         global $APPLICATION;
 
         if ($APPLICATION->GetGroupRight(Module::ID) == 'D') {
-            throw new AnnotationException(Loc::getMessage("ERR_ACCESS_DENIED"));
+            throw new AnnotationException(Loc::getMessage('ERR_ACCESS_DENIED'));
         }
 
         if (version_compare(PHP_VERSION, '8.1', '<')) {

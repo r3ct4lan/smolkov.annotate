@@ -6,7 +6,7 @@ use Bitrix\Main\Localization\Loc;
 use Orm\Annotate\Exceptions\AnnotationException;
 use Orm\Annotate\Module;
 
-$moduleId = "orm.annotate";
+$moduleId = 'orm.annotate';
 
 try {
     if (!Loader::includeModule($moduleId)) {
