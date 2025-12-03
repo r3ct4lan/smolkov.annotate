@@ -21,15 +21,16 @@ $arSettings = [
         "TITLE" => Loc::getMessage('TAB_MAIN_TITLE'),
         "FIELDS" => [
             [
-                "TITLE" => "modules",
+                "TITLE" => Loc::getMessage('FIELD_MODULES_TITLE'),
                 "NAME" => "modules",
                 "TYPE" => "select",
                 "OPTIONS" => $modules,
             ],
             [
-                "TITLE" => "output",
+                "TITLE" => Loc::getMessage('FIELD_OUTPUT_TITLE'),
                 "NAME" => "output",
                 "TYPE" => "file_dialog",
+                "DEFAULT" => "/bitrix/modules/orm_annotations.php",
                 "FILE_DIALOG_OPTIONS" => [
                     /** @see CAdminFileDialog::ShowScript */
                     "arPath" => ["PATH" => '/'],
@@ -41,10 +42,10 @@ $arSettings = [
                 ],
             ],
             [
-                "TITLE" => "clean",
+                "TITLE" => Loc::getMessage('FIELD_CLEAN_TITLE'),
                 "NAME" => "clean",
                 "TYPE" => "checkbox",
-                "DEFAULT" => true,
+                "DEFAULT" => false,
             ],
         ],
         "BUTTONS" => [

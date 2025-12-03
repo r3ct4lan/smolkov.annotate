@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @see ../settings.php
  * @var array $arSettings
  * @var string $moduleId
  *
