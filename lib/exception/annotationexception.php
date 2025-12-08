@@ -1,6 +1,6 @@
 <?php
 
-namespace Orm\Annotate\Exceptions;
+namespace Orm\Annotate\Exception;
 
 use Exception;
 

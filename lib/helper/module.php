@@ -1,6 +1,6 @@
 <?php
 
-namespace Orm\Annotate\Helpers;
+namespace Orm\Annotate\Helper;
 
 class Module
 {

@@ -3,7 +3,7 @@
 namespace Orm\Annotate;
 
 use Bitrix\Main\Cli\Command\Orm\AnnotateCommand;
-use Orm\Annotate\Helpers\Output;
+use Orm\Annotate\Helper\Output;
 use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;

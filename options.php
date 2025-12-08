@@ -3,7 +3,7 @@
 use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\Localization\Loc;
-use Orm\Annotate\Exceptions\AnnotationException;
+use Orm\Annotate\Exception\AnnotationException;
 use Orm\Annotate\Module;
 
 $moduleId = 'orm.annotate';

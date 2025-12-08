@@ -5,7 +5,7 @@ namespace Orm\Annotate;
 use Bitrix\Main\ArgumentOutOfRangeException;
 use Bitrix\Main\Config\Option;
 use Bitrix\Main\Localization\Loc;
-use Orm\Annotate\Exceptions\AnnotationException;
+use Orm\Annotate\Exception\AnnotationException;
 
 class Module
 {

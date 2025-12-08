@@ -1,8 +1,8 @@
 <?php
 
-namespace Orm\Annotate\Helpers;
+namespace Orm\Annotate\Helper;
 
-use Orm\Annotate\Helpers\Module as ModuleHelper;
+use Orm\Annotate\Helper\Module as ModuleHelper;
 use Orm\Annotate\Module;
 
 class Output

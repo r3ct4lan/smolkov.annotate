@@ -2,7 +2,7 @@
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
-use Orm\Annotate\Exceptions\AnnotationException;
+use Orm\Annotate\Exception\AnnotationException;
 use Orm\Annotate\Executor;
 use Orm\Annotate\Module;
 
