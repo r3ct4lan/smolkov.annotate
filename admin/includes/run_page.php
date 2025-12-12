@@ -6,6 +6,8 @@ use Orm\Annotate\Exception\AnnotationException;
 use Orm\Annotate\Executor;
 use Orm\Annotate\Module;
 
+global $APPLICATION;
+$APPLICATION->SetTitle(Loc::getMessage("TAB_MAIN_TITLE"));
 
 /**
  * Processing user actions

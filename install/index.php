@@ -3,6 +3,7 @@
 use Bitrix\Main\Application;
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\DB\SqlQueryException;
+use Bitrix\Main\EventManager;
 use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\ModuleManager;
@@ -25,6 +26,13 @@ class orm_annotate extends CModule
         TaskTable::class,
     ];
 
+    private array $filesList = [
+        'admin' => [
+            'target' => '/bitrix/admin',
+            'rewrite' => false,
+        ],
+    ];
+
     /**
      * @throws LoaderException
      * @throws SystemException
@@ -35,6 +43,7 @@ class orm_annotate extends CModule
         ModuleManager::registerModule($this->MODULE_ID);
         Loader::includeModule($this->MODULE_ID);
         $this->InstallDB();
+        $this->InstallFiles();
     }
 
     /**
@@ -46,6 +55,7 @@ class orm_annotate extends CModule
     public function DoUninstall(): void
     {
         Loader::includeModule($this->MODULE_ID);
+        $this->UnInstallFiles();
         $this->UnInstallDB();
         ModuleManager::unRegisterModule($this->MODULE_ID);
     }
@@ -66,7 +76,30 @@ class orm_annotate extends CModule
                 $instance->createDbTable();
             }
         }
+
+        $eventManager = EventManager::getInstance();
+        $eventManager->registerEventHandlerCompatible(
+            'main',
+            'OnBuildGlobalMenu',
+            $this->MODULE_ID,
+            /** @see \Orm\Annotate\Handler\Menu::onBuildGlobalMenuHandler */
+            '\\Orm\\Annotate\\Handler\\Menu',
+            'onBuildGlobalMenuHandler'
+        );
     }
+
+    public function InstallFiles(): void
+    {
+        foreach ($this->getFilesList() as $config) {
+            CopyDirFiles(
+                $config['from'],
+                $config['target'],
+                $config['rewrite'],
+                true
+            );
+        }
+    }
+
 
     /**
      * @throws ArgumentException
@@ -85,5 +118,41 @@ class orm_annotate extends CModule
                 $connection->dropTable($tableName);
             }
         }
+
+        $eventManager = EventManager::getInstance();
+        $eventManager->unRegisterEventHandler(
+            "main",
+            "OnBuildGlobalMenu",
+            $this->MODULE_ID,
+            '\\Orm\\Annotate\\Handler\\Menu',
+            'onBuildGlobalMenuHandler'
+        );
+    }
+
+    public function UnInstallFiles(): void
+    {
+        foreach ($this->getFilesList() as $config) {
+            DeleteDirFiles($config['from'], $config['target'],);
+        }
+    }
+
+    private function getFilesList(): array
+    {
+        $result = [];
+
+        $moduleDir = explode(DIRECTORY_SEPARATOR, __DIR__);
+        array_pop($moduleDir);
+        $moduleDir = implode(DIRECTORY_SEPARATOR, $moduleDir);
+
+        $sourceRoot = $moduleDir . '/install/';
+        $targetRoot = $_SERVER['DOCUMENT_ROOT'];
+
+        foreach ($this->filesList as $from => $config) {
+            $result[$from] = array_merge($config, [
+                'from' => $sourceRoot . $from,
+                'target' => $targetRoot . $config['target'],
+            ]);
+        }
+        return $result;
     }
 }

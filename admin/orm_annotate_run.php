@@ -1,4 +1,4 @@
-<?php
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin.php");
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
@@ -15,10 +15,12 @@ try {
 
     Module::checkHealth();
 
-    include __DIR__ . '/admin/includes/settings.php';
-    include __DIR__ . '/admin/includes/templates/tab_control.php';
+    include __DIR__ . '/includes/run_page.php';
+    include __DIR__ . '/includes/templates/tab_control.php';
 
 } catch (AnnotationException|LoaderException $e) {
     $arErrors = [$e->getMessage()];
-    include __DIR__ . '/admin/includes/templates/errors.php';
+    include __DIR__ . '/includes/templates/errors.php';
 }
+
+require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_admin.php");
