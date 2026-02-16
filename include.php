@@ -1,3 +1,3 @@
 <?php
 
-const ORM_ANNOTATE_MODULE_ID = 'orm.annotate';
+const SMOLKOV_ANNOTATE_MODULE_ID = 'smolkov.annotate';

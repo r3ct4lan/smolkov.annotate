@@ -3,10 +3,10 @@
 use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
 use Bitrix\Main\Localization\Loc;
-use Orm\Annotate\Exception\AnnotationException;
-use Orm\Annotate\Module;
+use Smolkov\Annotate\Exception\AnnotationException;
+use Smolkov\Annotate\Module;
 
-$moduleId = 'orm.annotate';
+$moduleId = 'smolkov.annotate';
 
 try {
     if (!Loader::includeModule($moduleId)) {

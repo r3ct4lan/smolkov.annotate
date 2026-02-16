@@ -10,9 +10,9 @@ use Bitrix\Main\ModuleManager;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Entity;
 use Bitrix\Main\SystemException;
-use Orm\Annotate\Model\TaskTable;
+use Smolkov\Annotate\Model\TaskTable;
 
-class orm_annotate extends CModule
+class smolkov_annotate extends CModule
 {
     public function __construct()
     {
@@ -82,8 +82,8 @@ class orm_annotate extends CModule
             'main',
             'OnBuildGlobalMenu',
             $this->MODULE_ID,
-            /** @see \Orm\Annotate\Handler\Menu::onBuildGlobalMenuHandler */
-            '\\Orm\\Annotate\\Handler\\Menu',
+            /** @see \Smolkov\Annotate\Handler\Menu::onBuildGlobalMenuHandler */
+            '\\Smolkov\\Annotate\\Handler\\Menu',
             'onBuildGlobalMenuHandler'
         );
     }
@@ -124,7 +124,7 @@ class orm_annotate extends CModule
             "main",
             "OnBuildGlobalMenu",
             $this->MODULE_ID,
-            '\\Orm\\Annotate\\Handler\\Menu',
+            '\\Smolkov\\Annotate\\Handler\\Menu',
             'onBuildGlobalMenuHandler'
         );
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Orm\Annotate\Model;
+namespace Smolkov\Annotate\Model;
 
 use Bitrix\Main\ArgumentTypeException;
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Fields;
 use Bitrix\Main\SystemException;
-use Orm\Annotate\Helper\Output;
+use Smolkov\Annotate\Helper\Output;
 
 class TaskTable extends DataManager
 {
@@ -15,7 +15,7 @@ class TaskTable extends DataManager
 
     public static function getTableName(): string
     {
-        return 'orm_annotate_task';
+        return 'smolkov_annotate_task';
     }
 
     /**

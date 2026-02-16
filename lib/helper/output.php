@@ -1,9 +1,9 @@
 <?php
 
-namespace Orm\Annotate\Helper;
+namespace Smolkov\Annotate\Helper;
 
-use Orm\Annotate\Helper\Module as ModuleHelper;
-use Orm\Annotate\Module;
+use Smolkov\Annotate\Helper\Module as ModuleHelper;
+use Smolkov\Annotate\Module;
 
 class Output
 {

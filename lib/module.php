@@ -1,15 +1,15 @@
 <?php
 
-namespace Orm\Annotate;
+namespace Smolkov\Annotate;
 
 use Bitrix\Main\ArgumentOutOfRangeException;
 use Bitrix\Main\Config\Option;
 use Bitrix\Main\Localization\Loc;
-use Orm\Annotate\Exception\AnnotationException;
+use Smolkov\Annotate\Exception\AnnotationException;
 
 class Module
 {
-    const ID = ORM_ANNOTATE_MODULE_ID;
+    const ID = SMOLKOV_ANNOTATE_MODULE_ID;
 
     public static function getOption($name, $default = ''): string
     {

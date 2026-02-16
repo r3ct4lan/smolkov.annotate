@@ -1,6 +1,6 @@
 <?php
 
-namespace Orm\Annotate\Exception;
+namespace Smolkov\Annotate\Exception;
 
 use Exception;
 

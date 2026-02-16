@@ -1,9 +1,9 @@
 <?php
 
-namespace Orm\Annotate;
+namespace Smolkov\Annotate;
 
 use Bitrix\Main\Cli\Command\Orm\AnnotateCommand;
-use Orm\Annotate\Helper\Output;
+use Smolkov\Annotate\Helper\Output;
 use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;

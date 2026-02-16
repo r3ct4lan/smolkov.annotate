@@ -1,6 +1,6 @@
 <?php
 
-namespace Orm\Annotate\Helper;
+namespace Smolkov\Annotate\Helper;
 
 class Module
 {

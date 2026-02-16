@@ -2,9 +2,9 @@
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
-use Orm\Annotate\Exception\AnnotationException;
-use Orm\Annotate\Executor;
-use Orm\Annotate\Module;
+use Smolkov\Annotate\Exception\AnnotationException;
+use Smolkov\Annotate\Executor;
+use Smolkov\Annotate\Module;
 
 global $APPLICATION;
 $APPLICATION->SetTitle(Loc::getMessage("TAB_MAIN_TITLE"));

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orm\Annotate\Handler;
+namespace Smolkov\Annotate\Handler;
 
 use Bitrix\Main\Localization\Loc;
 
@@ -14,12 +14,12 @@ class Menu
         $moduleMenu = [
             'text' => Loc::getMessage('MENU_GROUP_TITLE'),
             'title' => Loc::getMessage('MENU_GROUP_TITLE'),
-            'items_id' => 'orm_annotate',
+            'items_id' => 'smolkov_annotate',
             'items' => [
                 [
                     'text' => Loc::getMessage('MENU_ITEM_RUN_TITLE'),
                     'title' => Loc::getMessage('MENU_ITEM_RUN_TITLE'),
-                    'url' => 'orm_annotate_run.php',
+                    'url' => 'annotate_run.php',
                 ],
             ],
         ];
