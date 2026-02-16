@@ -6,6 +6,7 @@ use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Entity;
@@ -14,12 +15,27 @@ use Smolkov\Annotate\Model\TaskTable;
 
 class smolkov_annotate extends CModule
 {
+    var $MODULE_ID = "smolkov.annotate";
+    var $MODULE_NAME;
+    var $MODULE_DESCRIPTION;
+    var $MODULE_VERSION;
+    var $MODULE_VERSION_DATE;
+    var $PARTNER_NAME;
+    var $PARTNER_URI;
+
     public function __construct()
     {
-        $props = require __DIR__ . DIRECTORY_SEPARATOR . 'version.php';
-        foreach ($props as $k => $v) {
-            $this->$k = $v;
-        }
+        $arModuleVersion = [];
+
+        include(__DIR__ . "/version.php");
+
+        $this->MODULE_VERSION = $arModuleVersion["VERSION"];
+        $this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
+
+        $this->MODULE_NAME = Loc::getMessage("SMOLKOV_ANNOTATE_MODULE_NAME");
+        $this->MODULE_DESCRIPTION = Loc::getMessage("SMOLKOV_ANNOTATE_MODULE_DESCRIPTION");
+        $this->PARTNER_NAME = Loc::getMessage("SMOLKOV_ANNOTATE_PARTNER_NAME");
+        $this->PARTNER_URI = Loc::getMessage("SMOLKOV_ANNOTATE_PARTNER_URI");
     }
 
     private array $models = [
@@ -132,7 +148,7 @@ class smolkov_annotate extends CModule
     public function UnInstallFiles(): void
     {
         foreach ($this->getFilesList() as $config) {
-            DeleteDirFiles($config['from'], $config['target'],);
+            DeleteDirFiles($config['from'], $config['target']);
         }
     }
 
