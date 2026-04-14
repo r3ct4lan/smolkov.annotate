@@ -11,7 +11,9 @@ use Bitrix\Main\ModuleManager;
 use Bitrix\Main\ORM\Data\DataManager;
 use Bitrix\Main\ORM\Entity;
 use Bitrix\Main\SystemException;
+use Smolkov\Annotate\Exception\AnnotationException;
 use Smolkov\Annotate\Model\TaskTable;
+use Smolkov\Annotate\Module;
 
 class smolkov_annotate extends CModule
 {
@@ -60,6 +62,19 @@ class smolkov_annotate extends CModule
         Loader::includeModule($this->MODULE_ID);
         $this->InstallDB();
         $this->InstallFiles();
+        
+        try {
+            Module::checkComposerRequired();
+        } catch (AnnotationException $e) {
+            CAdminNotify::Add([
+                'MODULE_ID' => $this->MODULE_ID,
+                'TAG' => $this->MODULE_ID . '_composer_required',
+                'ENABLE_CLOSE' => 'Y',
+                'PUBLIC_SECTION' => 'N',
+                'NOTIFY_TYPE' => 'E',
+                'MESSAGE' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

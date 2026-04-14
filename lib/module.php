@@ -11,6 +11,10 @@ class Module
 {
     const ID = SMOLKOV_ANNOTATE_MODULE_ID;
 
+    private const composerRequires = [
+        'symfony/console' => 'Symfony\Component\Console\Application'
+    ];
+
     public static function getOption($name, $default = ''): string
     {
         return Option::get(Module::ID, $name, $default);
@@ -56,6 +60,29 @@ class Module
             && is_file($_SERVER['DOCUMENT_ROOT'] . '/local/modules/' . Module::ID . '/include.php')
         ) {
             throw new AnnotationException(Loc::getMessage('ERR_MODULE_DUPLICATED'));
+        }
+
+        self::checkComposerRequired();
+    }
+
+    /**
+     * @return void
+     * @throws AnnotationException
+     */
+    public static function checkComposerRequired(): void
+    {
+        $errors = [];
+
+        foreach (self::composerRequires as $packageName => $controlClass) {
+            if (!class_exists($controlClass)) {
+                $errors[] = $packageName;
+            }
+        }
+
+        if (!empty($errors)) {
+            throw new AnnotationException(Loc::getMessage('ERR_COMPOSER_REQUIRED', [
+                '#COMPOSER_NAME#' => join(', ', $errors)
+            ]));
         }
     }
 }
